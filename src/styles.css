@@ -76,3 +76,11 @@ p {
 div.container {
   max-width: 732px;
 }
+.link {
+  text-align: center;
+ color:  #ff3366;
+ font-weight: 600;
+  font-family: "Pacifico", cursive;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
