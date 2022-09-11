@@ -32,7 +32,7 @@ svg {
 }
 span.temperature {
   color: #233142;
-  font-size: 40px;
+  font-size: 35px;
 }
 span.city {
   color: #ff3366;
@@ -50,21 +50,12 @@ div.daytemperature {
   font-size: 22px;
   color: #233142;
 }
-span.C {
-  font-size: 14px;
-  color: #233142;
-}
 div.card {
   background: radial-gradient(
     283px at 1.7% 8.6%,
     rgb(141, 254, 235) 0%,
     rgb(232, 176, 254) 90%
   );
-}
-.wrapper {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  display: block;
 }
 p {
   color: #233142;
@@ -78,9 +69,52 @@ div.container {
 }
 .link {
   text-align: center;
- color:  #ff3366;
+ color: #ff3366;
  font-weight: 600;
   font-family: "Pacifico", cursive;
   font-family: "Poppins", sans-serif;
   font-size: 15px;
+}
+#me
+{
+  color:#233142;
+}
+#footer
+{
+  text-align: center;
+  color:  #233142;
+  font-weight: 500;
+   font-family: "Pacifico", cursive;
+   font-family: "Poppins", sans-serif;
+   font-size: 15px
+}
+h5.card-title {
+  font-weight: 600;
+  font-family: "Pacifico", cursive;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px
+}
+p.card-text{
+  font-weight: 500;
+  font-family: "Pacifico", cursive;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px
+}
+#weather-desc{
+  font-weight:500;
+  font-family: "Pacifico", cursive;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px
+}
+.wind
+{
+  font-weight:500;
+  font-family: "Pacifico", cursive;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px
+}
+img{
+  width: 60%;
+  display: block;
+  margin-top: 0em;
 }

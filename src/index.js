@@ -1,4 +1,4 @@
-//Challnge 1
+//Current time and date 
 let currentTime = new Date();
 
 function formatDate(date) {
@@ -27,11 +27,8 @@ function formatDate(date) {
   ];
   let currentmonth = months[date.getMonth()];
   let currentDate = date.getDate();
-  let currentYear = date.getFullYear();
   let currentDay = days[date.getDay()];
-
-  let formattedDate = `${currentDay}, ${currentmonth} ${currentDate}, ${currentYear}`;
-
+  let formattedDate = `${currentDay}, ${currentmonth} ${currentDate}, ${formatTime(currentTime)}`;
   return formattedDate;
 }
 
@@ -46,31 +43,56 @@ function formatTime(time) {
   });
 
   let formattedTime = `${fullTime}`;
-
   return formattedTime;
 }
-
 let newTime = document.querySelector("#clock");
-newTime.innerHTML = `${formatTime(currentTime)}`;
 
-//Challange 2
 function showCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#search-city");
   let newCity = document.querySelector("#city-name");
-
   newCity.innerHTML = cityInput.value;
 }
-
 let cityForm = document.querySelector("form");
 cityForm.addEventListener("submit", showCity);
 
-//Chaleng 3
+
+function showWeather(response) {
+  document.querySelector("#city-name").innerHTML = response.data.name;
+  document.querySelector(".temperature").innerHTML = Math.round(
+    response.data.main.temp);
+  document.querySelector("#weather-desc").innerHTML =
+  response.data.weather[0].description;
+  document.querySelector("#wind-speed").innerHTML = Math.round(
+  response.data.wind.speed * 3.6);
+}
+
+// current location
+function retrievePosition(position) {
+  let apiKey = "b32becf372227220ef6868c3037c0a49";
+  let lon = position.coords.longitude;
+  let lat = position.coords.latitude;
+  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+  axios.get(url).then(showWeather);
+}
+
+function getPosition(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(retrievePosition);
+}
+let getLocation = document.querySelector("#current-location-button");
+getLocation.addEventListener("click", getPosition);
+searchCity("Odesa");
+
+//Change of the weather icon
+let iconElement = document.querySelector("#icon");  
+iconElement.setAttribute("src", `http://openweathermap.org/img/wn/10d@2x.png`);
+
+//F and C temperature
 function celsiusConverter() {
   let number = document.querySelector(".temperature");
   number.innerHTML = "31";
 }
-
 function fahrenheitConverter() {
   let number = document.querySelector(".temperature");
   let temp = number.innerHTML;
@@ -82,21 +104,6 @@ celsius.addEventListener("click", celsiusConverter);
 
 let fahrenheit = document.querySelector(".fahrenheit");
 fahrenheit.addEventListener("click", fahrenheitConverter);
-
-//Week 5 tasks
-
-function showWeather(response) {
-  document.querySelector("#city-name").innerHTML = response.data.name;
-  document.querySelector(".temperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
-  //document.querySelector("#weather-desc").innerHTML =
-  //response.data.weather[0].description;
-  //document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  //document.querySelector("#wind-speed").innerHTML = Math.round(
-  // response.data.wind.speed * 3.6
-  //);
-}
 
 function searchCity(city) {
   let apiKey = "272e268bfc9a6f270688f54aeff8ae68";
@@ -111,24 +118,8 @@ function handleSubmit(event) {
   let city = document.querySelector("#search-city").value;
   searchCity(city);
 }
-
 let form = document.querySelector("form");
 form.addEventListener("submit", handleSubmit);
 
-searchCity("Odessa");
-
-// current location
-function showCurrentTemperature(position) {
-  let apiKey = "b32becf372227220ef6868c3037c0a49";
-  let units = "metric";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(showWeather);
-}
-
-function getCurrentLocation(event) {
-  event.preventDefault();
-  navigator.geolocation.getCurrentPosition(showCurrentTemperature);
-}
-
-let currentLocationButton = document.querySelector("#find-city");
-currentLocationButton.addEventListener("click", getCurrentLocation);
+let searchButton = document.querySelector("identify-city");
+searchButton.addEventListener("click", handleSubmit);
