@@ -74,6 +74,8 @@ function showWeather(response) {
   document
     .querySelector("#icon")
     .setAttribute("alt", response.data.weather[0].description);
+
+    celsiusTemp = Math.round(response.data.main.temp);
 }
 // current location
 function retrievePosition(position) {
@@ -92,20 +94,20 @@ let getLocation = document.querySelector("#current-location-button");
 getLocation.addEventListener("click", getPosition);
 searchCity("Odesa");
 
-// //Change of the weather icon
-// let iconElement = document.querySelector("#icon");  
-// iconElement.setAttribute("src", `http://openweathermap.org/img/wn/10d@2x.png`);
-
 //F and C temperature
-function celsiusConverter() {
-  let number = document.querySelector(".temperature");
-  number.innerHTML = "31";
+function celsiusConverter(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector(".temperature");
+tempElement.innerHTML = Math.round(celsiusTemp);
 }
-function fahrenheitConverter() {
-  let number = document.querySelector(".temperature");
-  let temp = number.innerHTML;
-  number.innerHTML = Math.round((temp * 9) / 5 + 32);
+function fahrenheitConverter(event) {  
+  event.preventDefault();
+  let tempElement = document.querySelector(".temperature");
+  let fahrenheitTemp = Math.round((celsiusTemp * 9) / 5 + 32);
+  tempElement.innerHTML=fahrenheitTemp;
 }
+
+let celsiusTemp = null;
 
 let celsius = document.querySelector(".celsius");
 celsius.addEventListener("click", celsiusConverter);
