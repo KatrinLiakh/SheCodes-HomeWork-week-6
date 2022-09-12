@@ -65,8 +65,16 @@ function showWeather(response) {
   response.data.weather[0].description;
   document.querySelector("#wind-speed").innerHTML = Math.round(
   response.data.wind.speed * 3.6);
+  document
+    .querySelector("#icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#icon")
+    .setAttribute("alt", response.data.weather[0].description);
 }
-
 // current location
 function retrievePosition(position) {
   let apiKey = "b32becf372227220ef6868c3037c0a49";
@@ -84,9 +92,9 @@ let getLocation = document.querySelector("#current-location-button");
 getLocation.addEventListener("click", getPosition);
 searchCity("Odesa");
 
-//Change of the weather icon
-let iconElement = document.querySelector("#icon");  
-iconElement.setAttribute("src", `http://openweathermap.org/img/wn/10d@2x.png`);
+// //Change of the weather icon
+// let iconElement = document.querySelector("#icon");  
+// iconElement.setAttribute("src", `http://openweathermap.org/img/wn/10d@2x.png`);
 
 //F and C temperature
 function celsiusConverter() {
@@ -120,6 +128,3 @@ function handleSubmit(event) {
 }
 let form = document.querySelector("form");
 form.addEventListener("submit", handleSubmit);
-
-let searchButton = document.querySelector("identify-city");
-searchButton.addEventListener("click", handleSubmit);
