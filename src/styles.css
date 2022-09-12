@@ -1,4 +1,4 @@
-div.col.a {
+.weather-forecat {
   text-align: center;
   font-family: "Pacifico", cursive;
   font-family: "Poppins", sans-serif;
@@ -42,14 +42,21 @@ span.city {
   font-family: "Poppins", sans-serif;
 }
 div.day {
-  font-size: 16px;
+  font-size: 22px;
   color: #233142;
   line-height: 2;
 }
 div.daytemperature {
-  font-size: 22px;
+  font-size: 16px;
   color: #233142;
 }
+.temp-min{
+  color: #0d6efd;
+}
+.daysImage{
+  margin-left: 0.4cm;
+}
+
 div.card {
   background: radial-gradient(
     283px at 1.7% 8.6%,
