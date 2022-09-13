@@ -32,6 +32,31 @@ function formatDate(date) {
   return formattedDate;
 }
 
+function displayForecast(){
+let forecastElement = document.querySelector("#forecast");
+
+let weekdays = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
+
+let forecastHtml = `<div class="row">`;
+weekdays.forEach (function(day){
+  forecastHtml = 
+  forecastHtml + `
+  <div class="col-2">
+    <div class="day">${day}</div>
+    <div class="daytemperature">
+      <span class="temp-max">27°</span>
+      <span class="justElement"> | </span>
+      <span class="temp-min"><strong>7°</strong></span>
+      </div>
+      <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="" class="daysImage"/>
+      </div>
+      `;
+});
+
+    forecastHtml = forecastHtml + `</div>`;
+forecastElement.innerHTML = forecastHtml;
+};
+
 let newDates = document.querySelector("#date-year");
 newDates.innerHTML = `${formatDate(currentTime)}`;
 
@@ -92,7 +117,7 @@ function getPosition(event) {
 }
 let getLocation = document.querySelector("#current-location-button");
 getLocation.addEventListener("click", getPosition);
-searchCity("Odesa");
+
 
 //F and C temperature
 function celsiusConverter(event) {
@@ -130,3 +155,6 @@ function handleSubmit(event) {
 }
 let form = document.querySelector("form");
 form.addEventListener("submit", handleSubmit);
+
+searchCity("Odesa");
+displayForecast();
