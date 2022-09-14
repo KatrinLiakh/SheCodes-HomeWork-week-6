@@ -32,6 +32,18 @@ function formatDate(date) {
   return formattedDate;
 }
 
+function formatTime(time) {
+  let fullTime = time.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true
+  });
+
+  let formattedTime = `${fullTime}`;
+  return formattedTime;
+}
+let newTime = document.querySelector("#clock");
+
 function formatDay(timestamp){
  let date = new Date(timestamp * 1000);
  let day = date.getDay();
@@ -60,23 +72,12 @@ forecast.forEach (function(forecastDay, index){
       </div>
       `;}
 });
-    forecastHtml = forecastHtml + `</div>`;
+forecastHtml = forecastHtml + `</div>`;
 forecastElement.innerHTML = forecastHtml;
 };
 let newDates = document.querySelector("#date-year");
 newDates.innerHTML = `${formatDate(currentTime)}`;
 
-function formatTime(time) {
-  let fullTime = time.toLocaleString("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true
-  });
-
-  let formattedTime = `${fullTime}`;
-  return formattedTime;
-}
-let newTime = document.querySelector("#clock");
 
 function showCity(event) {
   event.preventDefault();
@@ -112,9 +113,19 @@ function showWeather(response) {
     .setAttribute("alt", response.data.weather[0].description);
 
   getForecast(response.data.coord);
+  celsiusTemp = Math.round(response.data.main.temp);
 
-    celsiusTemp = Math.round(response.data.main.temp);
-}
+// Try to add audio and to change a background picture for a selected country
+    let selectedCountry = response.data.sys.country;
+    console.log(selectedCountry);
+    if (selectedCountry.value  = "UA")
+    {console.log(3*10);
+    let audio = new Audio('src/song.mp3');
+    audio.play();
+    document.querySelector("#bg").innerHTML = Image('src/pic.jpeg');
+    }
+  };
+
 // current location
 function retrievePosition(position) {
   let apiKey = "b32becf372227220ef6868c3037c0a49";
@@ -130,28 +141,6 @@ function getPosition(event) {
 }
 let getLocation = document.querySelector("#current-location-button");
 getLocation.addEventListener("click", getPosition);
-
-
-//F and C temperature
-function celsiusConverter(event) {
-  event.preventDefault();
-  let tempElement = document.querySelector(".temperature");
-tempElement.innerHTML = Math.round(celsiusTemp);
-}
-function fahrenheitConverter(event) {  
-  event.preventDefault();
-  let tempElement = document.querySelector(".temperature");
-  let fahrenheitTemp = Math.round((celsiusTemp * 9) / 5 + 32);
-  tempElement.innerHTML=fahrenheitTemp;
-}
-
-let celsiusTemp = null;
-
-let celsius = document.querySelector(".celsius");
-celsius.addEventListener("click", celsiusConverter);
-
-let fahrenheit = document.querySelector(".fahrenheit");
-fahrenheit.addEventListener("click", fahrenheitConverter);
 
 function searchCity(city) {
   let apiKey = "272e268bfc9a6f270688f54aeff8ae68";

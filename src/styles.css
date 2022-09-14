@@ -19,8 +19,8 @@ input {
   display: inline-block;
   margin: 0 auto;
   border-radius: 30px;
-  padding: 8px 130px 10px 5px;
-  font-size: 20px;
+  padding: 8px 130px 10px 15px;
+  font-size: 18px;
   border-color: #5a6275;
   border: 5px;
 }
@@ -124,4 +124,7 @@ img{
   width: 60%;
   display: block;
   margin-top: 0em;
+}
+.footer1{
+  margin-top: 0.7em;
 }
