@@ -32,7 +32,9 @@ function formatDate(date) {
   return formattedDate;
 }
 
-function displayForecast(){
+function displayForecast(response){
+  console.log(response.data.daily);
+
 let forecastElement = document.querySelector("#forecast");
 
 let weekdays = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
@@ -81,6 +83,11 @@ function showCity(event) {
 let cityForm = document.querySelector("form");
 cityForm.addEventListener("submit", showCity);
 
+function getForecast(coordinates){
+  let apiKeyNew = "be81f193e065bf5feb2d944c7336968b";
+  let apiUrlNew = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKeyNew}`;
+axios.get(apiUrlNew).then(displayForecast);
+};
 
 function showWeather(response) {
   document.querySelector("#city-name").innerHTML = response.data.name;
@@ -99,6 +106,8 @@ function showWeather(response) {
   document
     .querySelector("#icon")
     .setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 
     celsiusTemp = Math.round(response.data.main.temp);
 }
@@ -157,4 +166,3 @@ let form = document.querySelector("form");
 form.addEventListener("submit", handleSubmit);
 
 searchCity("Odesa");
-displayForecast();
