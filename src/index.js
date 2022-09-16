@@ -115,15 +115,14 @@ function showWeather(response) {
   getForecast(response.data.coord);
   celsiusTemp = Math.round(response.data.main.temp);
 
-// Try to add audio and to change a background picture for a selected country
-    let selectedCountry = response.data.sys.country;
-    console.log(selectedCountry);
-    if (selectedCountry.value  = "UA")
-    {console.log(3*10);
-    let audio = new Audio('src/song.mp3');
-    audio.play();
-    document.querySelector("#bg").innerHTML = Image('src/pic.jpeg');
-    }
+// // Try to add audio and to change a background picture for a selected country
+//     let selectedCountry = response.data.sys.country;
+//     if (selectedCountry  === "UA"){
+//       let audio = new Audio('src/song.mp3');
+//       audio.play();
+//       document.querySelector("#bg").style.backgroundImage = 'url("src/pic.jpg")';
+//       else (document.querySelector("#bg").style.backgroundImage = ;)
+//   }
   };
 
 // current location
